@@ -40,4 +40,40 @@ if (!Switch.Evaluate<int>(someValue,
 }
 ```
 
-The example above would execute both cases 42 and 43 because 42 returns `false` to allow further cases to be evaluated. If `someValue` was neither 0, nor 42, nor 43, the default code would be executed instead.
+The example above would execute both cases 42, and 43 because the callback action of case 42 returns `false` to allow further cases to be evaluated. If `someValue` was neither 0, nor 42, nor 43, the default code would be executed instead.
+
+## `Hourglass` class
+The `Hourglass` class (Namespace `Elements.Foundations.Flow`) implements a countdown based on the .NET/Mono Framework's `System.Threading.Stopwatch` class adapted to handle timeouts. Oftentimes calls to `Socket` methods or `WaitHandle`s require the specification of timeouts but whenever an overall timeout is specified for multiple of these calls, calculations for remaining timeouts and expiration disrupts the code.
+
+The `Hourglass` class offers methods to `Start`, `Stop`, and `Reset` the countdown. Multiple properties, e.g. `bool IsTimeout` tell about the current state and the `TestForTimeout` method throws a `TimeoutException` if a timeout has occurred. Calling `Reset` will stop the countdown first and not automatically restart it. Both `Reset` and the constructor accept an argument to specify the intended timeout as `TimeSpan` where -1 milliseconds represent an infinite timeout. `System.Threading.Timeout.InfiniteTimeSpan` can be used for an infinite timeout. Handing in values less than -1 milliseconds will throw `ArgumentOutOfRange` exceptions. Both methods `Start` and `Reset` return the `Hourglass` instance they have been invoked on to allow a single line instantiation and start of the countdown. If an infinite timeout had been specified, the `RemainingTimeout` will always be -1 milliseconds. If a different timeout had been specified, the `RemainingTimeout` will never be less than 0 milliseconds.
+
+There are no events to register handlers for because timeout calculations are only performed when actively checking for timeout. The accurarcy of calculations depends on the accuracy of the framework-provided `Stopwatch` implementation.
+
+Example:
+
+```
+var waitHandle1 = new ManualResetEvent(false);
+var waitHandle2 = new ManualResetEvent(false);
+...
+var timeout = new Hourglass(TimeSpan.FromSeconds(15)).Start();
+
+// Use the initial timeout.
+if (!waitHandle1.WaitOne(timeout.RemainingTimeout))
+{
+    ...
+    throw new TimeoutException(...);
+}
+
+// Use the remaining timeout with the same code on the second WaitHandle.
+if (!waitHandle2.WaitOne(timeout.RemainingTimeout))
+{
+    ...
+    throw new TimeoutException(...);
+}
+
+// Perform first long-running action.
+
+timeout.TestForTimeout();
+
+// Perform second long-running action.
+```
