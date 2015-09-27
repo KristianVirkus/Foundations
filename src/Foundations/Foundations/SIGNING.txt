@@ -1,0 +1,4 @@
+﻿Please sign the assembly with your own certificate instead of dummy.snk when
+publishing binaries of this library. dummy.snk is only present to
+	1. remind you of signing the assembly, and
+	2. make it compile while reminding you.
