@@ -1,7 +1,7 @@
 ﻿namespace Elements.Foundations.UnitTests
 {
 	using System.Threading;
-	using Elements.Foundations.Synchronization;
+	using Synchronization;
 	using FluentAssertions;
 	using NUnit.Framework;
 

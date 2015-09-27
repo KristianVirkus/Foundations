@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elements.Foundations.Flow;
-using NUnit.Framework;
 using FluentAssertions;
-using System.Threading;
+using NUnit.Framework;
 
-namespace Foundations.UnitTests.Flow
+namespace Elements.Foundations.UnitTests.Flow
 {
 	[TestFixture]
 	public class SwitchTest

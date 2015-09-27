@@ -1,8 +1,8 @@
-﻿namespace Foundations.UnitTests.Disposable
+﻿namespace Elements.Foundations.UnitTests.Disposable
 {
 	using System;
 	using System.Threading;
-	using Elements.Foundations.Disposable;
+	using Foundations.Disposable;
 	using FluentAssertions;
 	using NUnit.Framework;
 
