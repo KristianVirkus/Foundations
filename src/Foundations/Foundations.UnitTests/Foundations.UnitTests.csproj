@@ -7,8 +7,8 @@
     <ProjectGuid>{BB6D51FB-5D8B-44BC-BACA-FE0027043D46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Foundations.UnitTests</RootNamespace>
-    <AssemblyName>Foundations.UnitTests</AssemblyName>
+    <RootNamespace>Elements.Foundations.UnitTests</RootNamespace>
+    <AssemblyName>Elements.Foundations.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Disposable\CallbackDisposerTest.cs" />
+    <Compile Include="Flow\HourglassTest.cs" />
     <Compile Include="Flow\SwitchTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Synchronization\ReaderWriterLockSlimExtensionsTest.cs" />
