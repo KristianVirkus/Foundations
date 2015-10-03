@@ -46,7 +46,7 @@ timeout.TestForTimeout();
 ```
 
 ### `ObjectWrapper<T>` class
-The generic `ObjectWrapper<T>`class implements a simple wrapper around any instance of a specified type `T`. Using the object wrapper can be seen as a way to get the missing .NET functionality of references on value types and references on references back.
+The generic `ObjectWrapper<T>`class implements a simple wrapper around any instance of a specified type `T`. Using the object wrapper can be seen as a way to get the missing .NET functionality of references on value types and references on references back. It has got a `T Instance { get; set; }` property and both a parameterless constructor and one accepting an instance of `T`.
 
 ### `ReaderWriterLockSlimExtensions` class
 The `ReaderWriterLockSlimExtensions` class (Namespace `Elements.Foundation.Synchronization`) implements extension methods to the `ReaderWriterLockSlim` class to allow locking using a using statement instead of more complex and disrupting `try...finally` blocks.
