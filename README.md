@@ -1,13 +1,26 @@
 # Foundations
-Helps to handle or eases common recurring tasks.
+Helps to handle or eases common recurring tasks by offering small but ready-to-use building blocks.
 
 ## Licence
 The Foundations project is licenced under the "Apache License, Version 2.0."
+
+## Examples
+Especially for the more complex features, examples are given below. Apart from those, both the code's XML documentation and the implemented unit tests should give sufficient hints on their usage.
 
 ## Features
 
 ### `CallbackDisposer` class
 The `CallbackDisposer` class (Namespace `Elements.Foundations.Disposable`) implements the `IDisposable` interface. Upon instantiation a simple parameterless and return-value-less callback action must be specified. This callback action gets invoked when the instance gets disposed through the `Dispose` method. The disposal may only occur once. Any further attempt is ignored and the callback action doesn't get called again.
+
+Example:
+```
+var disposed = false;
+using (new CallbackDisposer(() => { disposed = true; }))
+{
+    // disposed == false
+}
+// disposed == true
+```
 
 ### `Hourglass` class
 The `Hourglass` class (Namespace `Elements.Foundations.Flow`) implements a countdown based on the .NET/Mono Framework's `System.Threading.Stopwatch` class adapted to handle timeouts. Oftentimes calls to `Socket` methods or `WaitHandle`s require the specification of timeouts but whenever an overall timeout is required for multiple of these calls, calculations for remaining timeouts and expiration disrupt the code.
