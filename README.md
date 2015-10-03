@@ -53,6 +53,23 @@ The `ReaderWriterLockSlimExtensions` class (Namespace `Elements.Foundation.Synch
 
 The class implements the extension methods `Read` for read access, `UpRead` for upgradeable read access, and `Write` for write access which return an `IDisposable` instance each. Internally these calls invoke `EnterReadLock`, `EnterUpgradeableReadLock`, or `EnterWriteLock` respectively. Disposing the returned object invokes `ExitReadLock`, `ExitUpgradeableReadLock`, or `ExitWriteLock` respectively. Thus, a lock on the `ReaderWriterLockSlim` can be acquired using the using statement instead of a more complex and disrupting `try...finally` block. All functionality of the `ReaderWriterLockSlim` remain intact and can be combined with the extension methods.
 
+Example:
+```
+var syncRoot = new ReaderWriterLockSlim();
+...
+// First thread:
+using (syncRoot.Read())
+{
+    // Read/shared access granted to whatever syncRoot shall synchronise.
+}
+...
+// Second thread:
+using (syncRoot.Write())
+{
+    // Write/exclusive access granted to whatever syncRoot shall synchronise.
+}
+```
+
 ### `Switch` static class
 The static `Switch` class (Namespace `Elements.Foundations.Flow`) implements an extended switch-case functionality by defining cases which don't necessarily rely on constants but on evaluating a set of `Predicate`s. Surely this comes at the cost of efficiency but it could be handy for replacing some if-then-else-trees and when falling through cases is required. Exceptions won't get caught.
 
@@ -63,22 +80,22 @@ Example:
 int someValue = 42;
 if (!Switch.Evaluate<int>(someValue,
     Switch.Case<int>(v => v == 0, (v) =>
-      {
+    {
         // someValue == 0 code and don't evaluate other cases by returning true
         return true;
-      }),
+    }),
     Switch.Case<int>(v => v == 42, (v) =>
-      {
+    {
         // someValue == 42 code and allow further cases to be evaluated by returning false
         return false;
-      }),
+    }),
     Switch.Case<int>(v => v == 43, (v) =>
-      {
+    {
         // someValue == 43 code
         return true;
-      })))
+    })))
 {
-  // default code in case non of the cases above applied
+    // default code in case non of the cases above applied
 }
 ```
 
